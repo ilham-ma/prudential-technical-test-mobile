@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import ComingSoonScreen from "../../components/common/coming-soon-screen";
 
 export default function RecipesScreen() {
-  return (
-    <View className="flex-1 items-center justify-center">
-      <Text>Recipes</Text>
-    </View>
-  );
+  return <ComingSoonScreen featureName="Recipes" />;
 }
