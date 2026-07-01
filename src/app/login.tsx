@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { router } from "expo-router";
-import * as Keychain from "react-native-keychain";
+import * as SecureStore from "expo-secure-store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginForm from "../components/login/login-form";
 import { LoginFormValues } from "../components/login/login-form/schema";
@@ -16,7 +16,7 @@ import {
 } from "../components/ui/toast";
 import { VStack } from "../components/ui/vstack";
 import { authService_login } from "../services/auth.service";
-import { ILoginResponse } from "../interfaces/login/login-response.interface.ts";
+import { ILoginResponse } from "../interfaces/auth/login-response.interface";
 
 export default function Login() {
   const toast = useToast();
@@ -38,11 +38,9 @@ export default function Login() {
       });
     },
     onSuccess: async (data: ILoginResponse) => {
-      const accessToken = data?.access_token;
+      const accessToken = data?.accessToken;
       if (!accessToken) return;
-      await Keychain.setGenericPassword("access_token", accessToken, {
-        service: "access_token",
-      });
+      await SecureStore.setItemAsync("access_token", accessToken);
     },
   });
 
