@@ -1,7 +1,8 @@
 import { AxiosResponse } from "axios";
 import { LoginFormValues } from "../components/login/login-form/schema";
 import { API_URL } from "../configs/api.config";
-import { ILoginResponse } from "../interfaces/login/login-response.interface";
+import { ILoginResponse } from "../interfaces/auth/login-response.interface";
+import { IProfileResponse } from "../interfaces/auth/profile-response.interface";
 import { http } from "../utils/axios.util";
 
 export async function authService_login(payload: LoginFormValues) {
@@ -10,5 +11,14 @@ export async function authService_login(payload: LoginFormValues) {
     payload,
   );
 
+  return response.data;
+}
+
+export async function authService_getProfile() {
+  const response: AxiosResponse<IProfileResponse> = await http.get(
+    `${API_URL}/user/me`,
+  );
+
+  console.log({ response });
   return response.data;
 }

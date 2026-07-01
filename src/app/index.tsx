@@ -1,15 +1,13 @@
 import { router } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { useEffect } from "react";
-import * as Keychain from "react-native-keychain";
 
 export default function Index() {
   useEffect(() => {
     (async () => {
-      const credentials = await Keychain.getGenericPassword({
-        service: "access_token",
-      });
+      const token = await SecureStore.getItemAsync("access_token");
 
-      if (credentials && credentials.password) {
+      if (token) {
         router.replace("/(tabs)");
       } else {
         router.replace("/login");
