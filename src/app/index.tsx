@@ -1,22 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { useEffect } from "react";
+import * as Keychain from "react-native-keychain";
 
-export default function Home() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        Edit src/app/index.tsx to edit this screen.
-      </Text>
-    </View>
-  );
+export default function Index() {
+  useEffect(() => {
+    (async () => {
+      const credentials = await Keychain.getGenericPassword({
+        service: "access_token",
+      });
+
+      if (credentials && credentials.password) {
+        router.replace("/(tabs)");
+      } else {
+        router.replace("/login");
+      }
+    })();
+  }, []);
+
+  return null;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "#000",
-  },
-});
