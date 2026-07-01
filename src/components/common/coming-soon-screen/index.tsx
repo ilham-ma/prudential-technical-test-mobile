@@ -1,7 +1,7 @@
-import { Center } from "../ui/center";
-import { Heading } from "../ui/heading";
-import { Text } from "../ui/text";
-import { VStack } from "../ui/vstack";
+import { Center } from "../../ui/center";
+import { Heading } from "../../ui/heading";
+import { Text } from "../../ui/text";
+import { VStack } from "../../ui/vstack";
 import { IComingSoonScreenProps } from "./props.interface";
 
 export default function ComingSoonScreen(props: IComingSoonScreenProps) {
